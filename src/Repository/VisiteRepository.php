@@ -20,6 +20,44 @@ class VisiteRepository extends ServiceEntityRepository
         parent::__construct($registry, Visite::class);
     }
     
+    /**
+     * Retourne toutes les visites triées surun champ
+     * @param type $champ
+     * @param type $ordre
+     * @return Visite[]
+     */
+    public function findAllOrderBy($champ, $ordre): array{
+        return $this->createQueryBuilder('v')
+            ->orderBy('v.'.$champ, $ordre)
+            ->getQuery()
+            ->getResult();
+    }
+    
+    /**
+     * Enregistrements dont un champ est égal à une valeur
+     * ou tous les enregistrements si la valeur est vide
+     * @param type $champ
+     * @param type $valeur
+     * @return Visite[] 
+     */
+    public function findByEqualValue(string $champ, $valeur): array
+    {
+        if ($valeur == "") {
+            return $this->createQueryBuilder('v')
+                ->orderBy('v.' . $champ, 'ASC')
+                ->getQuery()
+                ->getResult();
+        }
+        else {
+            return $this->createQueryBuilder('v')
+                ->where('v.' . $champ . ' = :valeur')
+                ->setParameter('valeur', $valeur)
+                ->orderBy('v.datecreation', 'DESC')
+                ->getQuery()
+                ->getResult();
+        }
+    }
+
 
     //    /**
     //     * @return Visite[] Returns an array of Visite objects
