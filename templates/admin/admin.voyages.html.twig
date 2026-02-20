@@ -19,7 +19,7 @@
                     <td>{{ visite.pays }}</td>
                     <td>{{ visite.datecreationstring }}</td>
                     <td>
-                        <a href="#" class="btn btn-secondary">Éditer</a>
+                        <a href="{{ path('admin.voyage.edit', {'id': visite.id}) }}" class="btn btn-secondary">Éditer</a>
                         <a href="{{ path('admin.voyage.suppr', {'id': visite.id}) }}" class="btn btn-danger">Supprimer</a>
                     </td>
                 </tr>
