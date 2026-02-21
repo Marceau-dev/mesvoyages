@@ -68,7 +68,7 @@ class AdminVoyagesController extends AbstractController{
     }
     
     #[Route('/admin/suppr/{id}', name: 'admin.voyage.suppr')]
-    public function supr(int $id): Response
+    public function suppr(int $id): Response
     {
         $visite = $this->repository->find($id);
         $this->repository->remove($visite);
