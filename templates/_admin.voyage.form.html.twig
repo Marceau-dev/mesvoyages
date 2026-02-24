@@ -23,10 +23,26 @@
                     {{ form_row(formVisite.pays) }}
                 </div>
                 {{ form_row(formVisite.environnements) }}
+                {# Emplacement image #}
+                <div>
+                    {{ form_row(formVisite.imageFile) }}
+                </div>
             </div>
             <div class="row">
                 <div class="col">
-                    <!-- emplacement image -->
+                    <div>
+                        Image actuelle : 
+                        {% if visite.imageName %}
+                            <img
+                                src="{{ app.request.getBasePath() ~ vich_uploader_asset(visite, 'imageFile') }}"
+                                class="card-img-top"
+                                style="width: 100%; height: auto;"
+                                alt="Image de la visite"
+                            >
+                        {% else %}
+                            <p>(aucune image)</p>
+                        {% endif %}
+                    </div>
                 </div>
             </div>
             <div class="row">
