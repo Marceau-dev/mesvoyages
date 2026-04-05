@@ -28,19 +28,22 @@
                         </div>
                     </form>
                 </th>
-                <th class="text-end align-top" scope="col">
-                    Note
-                    <a href="{{ path('voyages.sort',{champ:'note', ordre:'ASC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><</a>
-                    <a href="{{ path('voyages.sort',{champ:'note', ordre:'DESC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">></a>
-                    <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', {champ:'note'}) }}">
+                <th class="align-top" scope="col">
+                    Environnements
+                    <form class="form-inline mt-1" method="POST" action="{{ path('voyages.findallequal', {champ:'environnements'}) }}">
                         <div class="form-group mr-1 mb-2">
                             <input type="text" class="sm" name="recherche">
-                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_note') }}" />
+                            <input type="hidden" name="_token" value="{{ csrf_token('filtre_environnements')}}" />
                             <button type="submit" class="btn btn-primary mb-2 btn-sm">filtrer</button>
                         </div>
                     </form>
                 </th>
-                <th class="text-center align-top" scope="col">
+                <th class="text-end align-top" scope="col">
+                    Note
+                    <a href="{{ path('voyages.sort',{champ:'note', ordre:'ASC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><</a>
+                    <a href="{{ path('voyages.sort',{champ:'note', ordre:'DESC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">></a>
+                </th>
+                <th class="text-end align-top" scope="col"> 
                     Date
                     <a href="{{ path('voyages.sort',{champ:'datecreation', ordre:'ASC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true"><</a>
                     <a href="{{ path('voyages.sort',{champ:'datecreation', ordre:'DESC'}) }}" class="btn btn-primary btn-sm active" role="button" aria-pressed="true">></a>
@@ -58,6 +61,18 @@
                     </td>
                     <td>
                         {{ visite.pays }}
+                    </td>         
+                    <td class="align-top">
+                        {% for environnement in visite.environnements %}
+                            {{ environnement.nom }}
+                            {% if not loop.last %}
+                                {% if loop.index is divisible by(3) %}
+                                    <br>
+                                {% else %}
+                                -
+                                {% endif %}
+                            {% endif %}
+                        {% endfor %}
                     </td>
                     <td class="text-end">
                         <strong>

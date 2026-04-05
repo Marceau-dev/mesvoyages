@@ -33,6 +33,17 @@ class VisiteRepository extends ServiceEntityRepository
             ->getResult();
     }
     
+    public function findByEnvironnement(string $valeur): array
+    {
+        return $this->createQueryBuilder('v')
+            ->innerJoin('v.environnements', 'e')
+            ->andWhere('e.nom = :valeur')
+            ->setParameter('valeur', $valeur)
+            ->orderBy('v.datecreation', 'DESC')
+            ->getQuery()
+            ->getResult();
+    }
+    
     /**
      * Enregistrements dont un champ est égal à une valeur
      * ou tous les enregistrements si la valeur est vide
