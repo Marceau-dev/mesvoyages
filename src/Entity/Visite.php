@@ -52,7 +52,7 @@ class Visite
     /**
      * @var Collection<int, environnement>
      */
-    #[ORM\ManyToMany(targetEntity: environnement::class)]
+    #[ORM\ManyToMany(targetEntity: Environnement::class)]
     private Collection $environnements;
 
     public function __construct()
